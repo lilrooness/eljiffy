@@ -4,6 +4,7 @@ defmodule Eljiffy.MixProject do
   def project do
     [
       app: :eljiffy,
+      description: "An Elixir wrapper around the erlang json nifs library, Jiffy (github.com/davisp/jiffy)"
       version: "1.0.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
@@ -30,7 +31,7 @@ defmodule Eljiffy.MixProject do
 
   defp package do
     [
-      files: ["lib", "mix.exs", "README.md", "LICENSE*"],
+      files: ["lib", "mix.exs", "README.md", "LICENSE"],
       maintainers: ["lilrooness"],
       licenses: ["Apache 2.0"],
       links: %{"GitHub" => "https://github.com/lilrooness/eljiffy"}
