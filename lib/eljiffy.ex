@@ -46,12 +46,12 @@ defmodule Eljiffy do
   end
   
   @doc """
-  decode_map
+  decode_maps
 
   ## Examples
 
       iex> jsonData = "{\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]}"
-      iex> Eljiffy.decode_map(jsonData)
+      iex> Eljiffy.decode_maps(jsonData)
         %{:people => [
             %{:name => "Joe"},
             %{:name => "Robert"},
@@ -59,11 +59,11 @@ defmodule Eljiffy do
         ]}
 
   """
-  def decode_map(data) do
+  def decode_maps(data) do
     :jiffy.decode(data, [:return_maps])
   end
 
-  def decode_map(data, opts) do
+  def decode_maps(data, opts) do
     :jiffy.decode(data, [:return_maps] ++ opts)
   end
 end
