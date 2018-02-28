@@ -18,5 +18,5 @@ end
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-The docs can be found at [https://hexdocs.pm/eljiffy/1.0.0/Eljiffy.html](https://hexdocs.pm/eljiffy).
+The docs can be found at [https://hexdocs.pm/eljiffy/1.0.0/Eljiffy.html](https://hexdocs.pm/eljiffy/1.0.0/Eljiffy.html).
 
