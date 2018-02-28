@@ -1,0 +1,3 @@
+%{
+  "jiffy": {:git, "https://github.com/davisp/jiffy.git", "031f9dbbf6c31b83585569cd290504f006540a77", [branch: "master"]},
+}
