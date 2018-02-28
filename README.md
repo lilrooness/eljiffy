@@ -1,6 +1,8 @@
 # Eljiffy
 
-**TODO: Add description**
+Eljiffy (Elixir Jiffy) is an Elixir wrapper around the erlang JSON nif library Jiffy.
+It also provides functions to convert json to maps directly rather than having to pass the option return_maps explicitly
+(https://github.com/davisp/jiffy)
 
 ## Installation
 
