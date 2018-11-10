@@ -5,7 +5,7 @@ defmodule Eljiffy.MixProject do
     [
       app: :eljiffy,
       description: "An Elixir wrapper around the erlang json nifs library, Jiffy (github.com/davisp/jiffy)",
-      version: "1.0.0",
+      version: "1.1.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),

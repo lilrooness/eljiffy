@@ -1,5 +1,7 @@
 # Eljiffy
 
+Compatible ```json_decoder``` for ```Plug.Parsers.JSON``` since v1.1.0
+
 Eljiffy (Elixir Jiffy) is an Elixir wrapper around the erlang JSON nif library Jiffy.
 It also provides functions to convert json to maps directly rather than having to pass the option return_maps explicitly
 (https://github.com/davisp/jiffy)
