@@ -1,8 +1,4 @@
 defmodule EljiffyTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest Eljiffy
-
-  test "greets the world" do
-    assert Eljiffy.hello() == :world
-  end
 end
