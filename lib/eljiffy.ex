@@ -81,7 +81,7 @@ defmodule Eljiffy do
       %{"name" => "Mike"}
     ]}
   """
-  @since "1.1.0"
+  @doc since: "1.1.0"
   @deprecated "use decode!/1 instead"
   def decode_maps(data) do
     :jiffy.decode(data, [:return_maps])
@@ -90,7 +90,7 @@ defmodule Eljiffy do
   @doc """
   Does the same thing as `decode_maps/1` but accepts decode options (see [opts](#module-the-opts-parameter-for-decode-2-is-a-list-of-terms))
   """
-  @since "1.1.0"
+  @doc since: "1.1.0"
   @deprecated "use decode!/2 instead"
   def decode_maps(data, opts) do
     :jiffy.decode(data, [:return_maps] ++ opts)
