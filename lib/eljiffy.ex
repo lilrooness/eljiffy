@@ -28,17 +28,17 @@ defmodule Eljiffy do
 
   @doc """
   Transforms a json string into a key/value list in EEP 18 format
-  
+
   ## Examples
-      iex> jsonData = "{\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]}"
-      iex> Eljiffy.decode_proplist (jsonData)
-      {[
-          {"people" [
-              {[{"name", "Joe"}]},
-              {[{"name", "Robert"}]},
-              {[{"name", "Mike"}]}
-          ]}
+    iex> jsonData = ~s({\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]})
+    iex> Eljiffy.decode_proplist(jsonData)
+    {[
+      {"people", [
+        {[{"name", "Joe"}]},
+        {[{"name", "Robert"}]},
+        {[{"name", "Mike"}]}
       ]}
+    ]}
   """
   def decode_proplist(data) do
     :jiffy.decode(data)
@@ -55,9 +55,9 @@ defmodule Eljiffy do
   Transforms a EEP 18 format key/value list or map into a json string
 
   ## Examples
-      iex> term = %{:langs => [%{:elixir => %{:beam => :true}}, %{:erlang => %{:beam => :true}}, %{:rust => %{:beam => :false}}]}
-      iex> Eljiffy.encode!(term)
-      "{\"langs\":[{\"elixir\":{\"beam\":true}},{\"erlang\":{\"beam\":true}},{\"rust\":{\"beam\":false}}]}"
+    iex> term = %{langs: [%{elixir: %{beam: :true}}, %{erlang: %{beam: :true}}, %{rust: %{beam: :false}}]}
+    iex> Eljiffy.encode!(term)
+    ~s({\"langs\":[{\"elixir\":{\"beam\":true}},{\"erlang\":{\"beam\":true}},{\"rust\":{\"beam\":false}}]})
   """
   def encode!(data) do
     :jiffy.encode(data)
@@ -69,21 +69,19 @@ defmodule Eljiffy do
   def encode!(data, opts) do
     :jiffy.encode(data, opts)
   end
-  
+
   @doc """
   Transforms a json string into a map
   ## Examples
-
-      iex> jsonData = "{\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]}"
-      iex> Eljiffy.decode_maps(jsonData)
-        %{:people => [
-            %{:name => "Joe"},
-            %{:name => "Robert"},
-            %{:name => "Mike"}
-        ]}
-
+    iex> jsonData = ~s({\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]})
+    iex> Eljiffy.decode_maps(jsonData)
+    %{"people" => [
+      %{"name" => "Joe"},
+      %{"name" => "Robert"},
+      %{"name" => "Mike"}
+    ]}
   """
-  @since "1.1.0"
+  @doc since: "1.1.0"
   @deprecated "use decode!/1 instead"
   def decode_maps(data) do
     :jiffy.decode(data, [:return_maps])
@@ -92,7 +90,7 @@ defmodule Eljiffy do
   @doc """
   Does the same thing as `decode_maps/1` but accepts decode options (see [opts](#module-the-opts-parameter-for-decode-2-is-a-list-of-terms))
   """
-  @since "1.1.0"
+  @doc since: "1.1.0"
   @deprecated "use decode!/2 instead"
   def decode_maps(data, opts) do
     :jiffy.decode(data, [:return_maps] ++ opts)
@@ -101,21 +99,19 @@ defmodule Eljiffy do
   @doc """
   Transforms a json string into a map
   ## Examples
-
-      iex> jsonData = "{\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]}"
-      iex> Eljiffy.decode!(jsonData)
-        %{:people => [
-            %{:name => "Joe"},
-            %{:name => "Robert"},
-            %{:name => "Mike"}
-        ]}
-
+    iex> jsonData = ~s({\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]})
+    iex> Eljiffy.decode!(jsonData)
+    %{"people" => [
+      %{"name" => "Joe"},
+      %{"name" => "Robert"},
+      %{"name" => "Mike"}
+    ]}
   """
   def decode!(data) do
     :jiffy.decode(data, [:return_maps])
   end
 
-    @doc """
+  @doc """
   Does the same thing as `decode!/1` but accepts decode options (see [opts](#module-the-opts-parameter-for-decode-2-is-a-list-of-terms))
   """
   def decode!(data, opts) do

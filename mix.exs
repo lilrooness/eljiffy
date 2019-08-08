@@ -4,9 +4,10 @@ defmodule Eljiffy.MixProject do
   def project do
     [
       app: :eljiffy,
-      description: "An Elixir wrapper around the erlang json nifs library, Jiffy (github.com/davisp/jiffy)",
-      version: "1.1.0",
-      elixir: "~> 1.6",
+      description:
+        "An Elixir wrapper around the erlang json nifs library, Jiffy (github.com/davisp/jiffy)",
+      version: "1.2.0",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package()
@@ -25,7 +26,7 @@ defmodule Eljiffy.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
-      {:jiffy, "~> 0.15.0"},
+      {:jiffy, "~> 1.0"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
