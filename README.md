@@ -14,7 +14,7 @@ by adding `eljiffy` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:eljiffy, "~> 1.2.0"}
+    {:eljiffy, "~> 1.3.0"}
   ]
 end
 ```
