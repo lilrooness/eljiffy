@@ -54,24 +54,42 @@ defmodule Eljiffy do
   @doc """
   Transforms a EEP 18 format key/value list or map into a json string
 
+  Accepts encode options (see [opts](#module-the-opts-parameter-for-encode-2-is-a-list-of-terms))
+
   ## Examples
     iex> term = %{langs: [%{elixir: %{beam: :true}}, %{erlang: %{beam: :true}}, %{rust: %{beam: :false}}]}
     iex> Eljiffy.encode!(term)
     ~s({\"langs\":[{\"elixir\":{\"beam\":true}},{\"erlang\":{\"beam\":true}},{\"rust\":{\"beam\":false}}]})
   """
-  def encode!(data) do
-    :jiffy.encode(data)
-  end
-
-  @doc """
-  Does the same thing as `encode!/1` but accepts encode options (see [opts](#module-the-opts-parameter-for-encode-2-is-a-list-of-terms))
-  """
-  def encode!(data, opts) do
+  def encode!(data, opts \\ []) do
     :jiffy.encode(data, opts)
   end
 
   @doc """
+  Transforms a EEP 18 format key/value list or map into a json string
+
+  Accepts encode options (see [opts](#module-the-opts-parameter-for-encode-2-is-a-list-of-terms))
+
+  ## Examples
+    iex> term = %{langs: [%{elixir: %{beam: :true}}, %{erlang: %{beam: :true}}, %{rust: %{beam: :false}}]}
+    iex> Eljiffy.encode(term)
+    {:ok, ~s({\"langs\":[{\"elixir\":{\"beam\":true}},{\"erlang\":{\"beam\":true}},{\"rust\":{\"beam\":false}}]})}
+
+    iex> term = <<255>>
+    iex> Eljiffy.encode(term)
+    {:error, %ErlangError{original: {:invalid_string, <<255>>}}}
+  """
+  def encode(data, opts \\ []) do
+    {:ok, encode!(data, opts)}
+  rescue
+    exception -> {:error, exception}
+  end
+
+  @doc """
   Transforms a json string into a map
+
+  Accepts decode options (see [opts](#module-the-opts-parameter-for-decode-2-is-a-list-of-terms))
+
   ## Examples
     iex> jsonData = ~s({\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]})
     iex> Eljiffy.decode_maps(jsonData)
@@ -82,22 +100,16 @@ defmodule Eljiffy do
     ]}
   """
   @doc since: "1.1.0"
-  @deprecated "use decode!/1 instead"
-  def decode_maps(data) do
-    :jiffy.decode(data, [:return_maps])
-  end
-
-  @doc """
-  Does the same thing as `decode_maps/1` but accepts decode options (see [opts](#module-the-opts-parameter-for-decode-2-is-a-list-of-terms))
-  """
-  @doc since: "1.1.0"
   @deprecated "use decode!/2 instead"
-  def decode_maps(data, opts) do
+  def decode_maps(data, opts \\ []) do
     :jiffy.decode(data, [:return_maps] ++ opts)
   end
 
   @doc """
   Transforms a json string into a map
+
+  Accepts decode options (see [opts](#module-the-opts-parameter-for-decode-2-is-a-list-of-terms))
+
   ## Examples
     iex> jsonData = ~s({\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]})
     iex> Eljiffy.decode!(jsonData)
@@ -107,14 +119,31 @@ defmodule Eljiffy do
       %{"name" => "Mike"}
     ]}
   """
-  def decode!(data) do
-    :jiffy.decode(data, [:return_maps])
+  def decode!(data, opts \\ []) do
+    :jiffy.decode(data, [:return_maps] ++ opts)
   end
 
   @doc """
-  Does the same thing as `decode!/1` but accepts decode options (see [opts](#module-the-opts-parameter-for-decode-2-is-a-list-of-terms))
+  Transforms a json string into a map
+
+  Accepts decode options (see [opts](#module-the-opts-parameter-for-decode-2-is-a-list-of-terms))
+
+  ## Examples
+    iex> jsonData = ~s({\"people\": [{\"name\": \"Joe\"}, {\"name\": \"Robert\"}, {\"name\": \"Mike\"}]})
+    iex> Eljiffy.decode(jsonData)
+    {:ok, %{"people" => [
+      %{"name" => "Joe"},
+      %{"name" => "Robert"},
+      %{"name" => "Mike"}
+    ]}}
+
+    iex> jsonData = ~s(invalid_json)
+    iex> Eljiffy.decode(jsonData)
+    {:error, %ErlangError{original: {1, :invalid_json}}}
   """
-  def decode!(data, opts) do
-    :jiffy.decode(data, [:return_maps] ++ opts)
+  def decode(data, opts \\ []) do
+    {:ok, decode!(data, [:return_maps] ++ opts)}
+  rescue
+    exception -> {:error, exception}
   end
 end
